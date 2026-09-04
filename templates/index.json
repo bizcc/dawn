@@ -1,5 +1,14 @@
 {
   "sections": {
+    "preorder_hero": {
+      "type": "preorder-hero",
+      "settings": {
+        "headline": "Preorder the iPhone 18 Pro",
+        "subheading": "Secure yours now — full checkout available.",
+        "show_countdown": false,
+        "countdown_end_date": ""
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -69,6 +78,7 @@
     }
   },
   "order": [
+    "preorder_hero",
     "image_banner",
     "featured_collection"
   ]
