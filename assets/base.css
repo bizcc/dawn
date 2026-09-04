@@ -11,6 +11,13 @@ collection-component {
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  /* Brand variables for minimal tech theme */
+  --brand-bg: 11,15,20; /* rgb values for reuse */
+  --brand-foreground: 230,238,246;
+  --brand-muted: 156,163,175;
+  --brand-accent: 125,211,252;
+  --brand-radius: 10px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .product-card-wrapper .card,
@@ -85,6 +92,21 @@ collection-component {
   max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Global typography and background for the store */
+body {
+  background-color: rgb(var(--brand-bg));
+  color: rgb(var(--brand-foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility button styles matching preorder look */
+.btn, button, .button {
+  border-radius: var(--brand-radius);
+  font-family: var(--font-sans);
 }
 
 body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {

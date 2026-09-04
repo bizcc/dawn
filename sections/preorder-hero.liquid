@@ -1,0 +1,51 @@
+<section id="preorder-hero-{{ section.id }}" class="preorder-hero">
+  <div class="preorder-inner">
+    <div class="preorder-media">
+      {% comment %} Prefer selected product in section settings, otherwise fall back to page product {% endcomment %}
+      {% assign selected_product = null %}
+      {% if section.settings.product and all_products[section.settings.product] %}
+        {% assign selected_product = all_products[section.settings.product] %}
+      {% elsif product %}
+        {% assign selected_product = product %}
+      {% endif %}
+
+      {% if selected_product and selected_product.featured_image %}
+        <img src="{{ selected_product.featured_image | img_url: '1024x' }}" alt="{{ selected_product.title }}" loading="lazy">
+      {% endif %}
+    </div>
+
+    <div class="preorder-content">
+      <h1 class="preorder-title">{{ section.settings.headline }}</h1>
+      <p class="preorder-sub">{{ section.settings.subheading }}</p>
+
+      {% if selected_product %}
+        <form class="preorder-form" onsubmit="return false;" data-variant-id="{{ selected_product.selected_or_first_available_variant.id }}">
+          <button type="button" class="preorder-btn" data-variant-id="{{ selected_product.selected_or_first_available_variant.id }}">Preorder Now</button>
+        </form>
+      {% else %}
+        <div class="preorder-no-product">Select a product in theme editor</div>
+      {% endif %}
+
+      {% if section.settings.show_countdown and section.settings.countdown_end_date != blank %}
+        <div class="preorder-countdown" data-end="{{ section.settings.countdown_end_date }}"></div>
+      {% endif %}
+    </div>
+  </div>
+
+  {{ 'preorder.css' | asset_url | stylesheet_tag }}
+  {{ 'preorder.js' | asset_url | script_tag }}
+</section>
+
+{% schema %}
+{
+  "name": "Preorder hero",
+  "settings": [
+    {"type":"product","id":"product","label":"Product"},
+    {"type":"text","id":"headline","label":"Headline","default":"Preorder the iPhone 18 Pro"},
+    {"type":"text","id":"subheading","label":"Subheading","default":"Secure yours today — full checkout available."},
+    {"type":"checkbox","id":"show_countdown","label":"Show countdown","default":true},
+    {"type":"text","id":"countdown_end_date","label":"Countdown end (ISO 8601)","default":""}
+  ],
+  "presets": [{"name":"Preorder hero","category":"Hero"}]
+}
+{% endschema %}
